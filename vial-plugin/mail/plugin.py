@@ -7,7 +7,6 @@ from .api import get_book, get_addresses
 
 MAILDIR = os.path.expanduser('~/mail')
 BOOK = os.path.expanduser('~/mail/addresses')
-last_result = None
 cached_book = single(get_book, BOOK)
 
 
@@ -18,7 +17,6 @@ def update():
 
 
 def omnifunc(findstart, base):
-    global last_result
     if findstart:
         vim.command('norm! b')
         return vim.current.window.cursor[1]
