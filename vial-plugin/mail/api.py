@@ -39,11 +39,12 @@ def get_addresses(maildir):
             fname = os.path.join(root, fname)
             msg = HeaderParser().parse(open(fname))
 
+            froms = msg.get_all('from', [])
             tos = msg.get_all('to', [])
             ccs = msg.get_all('cc', [])
             resent_tos = msg.get_all('resent-to', [])
             resent_ccs = msg.get_all('resent-cc', [])
-            all_recipients = getaddresses(tos + ccs + resent_tos + resent_ccs)
+            all_recipients = getaddresses(froms + tos + ccs + resent_tos + resent_ccs)
             for (title, addr) in all_recipients:
                 emails.setdefault(addr, set()).add(title)
 

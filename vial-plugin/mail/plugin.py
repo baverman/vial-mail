@@ -17,10 +17,10 @@ def update():
 
 
 def omnifunc(findstart, base):
-    if findstart:
-        vim.command('norm! b')
-        return vim.current.window.cursor[1]
-    else:
+    if findstart in (0, b'0'):
         q = unidecode(base.decode('utf-8')).lower()
         book = cached_book()
         return [r[1] for r in book if q in r[0]]
+    else:
+        vim.command('norm! b')
+        return vim.current.window.cursor[1]
